@@ -1,0 +1,4 @@
+{
+  "create sensor": "make a python program to create a sensor",
+  "create actuator": "make an actuator using python"
+}
