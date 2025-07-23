@@ -35,3 +35,15 @@ n2 = cur.execute("INSERT INTO nodes(data) VALUES(?)", (json.dumps({"name":"B"}),
 cur.execute("INSERT INTO edges(src,dst,data) VALUES(?,?,?)",
             (n1, n2, json.dumps({"weight": 3.14})))
 db.commit()
+
+'''
+Need traversal? For small/medium graphs, selecting edges recursively with SQLite recursive CTEs is fine:
+
+WITH RECURSIVE walk(n) AS (
+  SELECT :start_id
+  UNION
+  SELECT dst FROM edges, walk WHERE src = walk.n
+)
+SELECT n FROM walk;
+
+'''
