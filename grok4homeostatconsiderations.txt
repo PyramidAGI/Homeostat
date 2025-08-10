@@ -14,3 +14,15 @@ Stops when stable (state equals setpoint) or after a max iterations to prevent i
 
 The code parses rules using basic string processing (splitting and keyword checks). It assumes numeric amounts for adjustments.
 
+-------------------------
+ExplanationParsing Rules: Uses regex to extract components from the English sentences. This keeps it simple but assumes rules follow the format closely.
+Feedback Loop: In each iteration, it checks conditions, applies the first matching rule's action, and may add random perturbations to test stability.
+Stabilization: Adjusts the state toward the setpoint. For example, starting at 10 with setpoint 5, it will decrease by 2 until below, then increase by 1 as needed, oscillating slightly due to perturbations but aiming for equilibrium.
+Extensibility: You can add more variables (e.g., {'pressure': 100}) and rules for them. For multi-variable interactions, rules could reference multiple vars, but that would require more advanced parsing.
+Limitations: Parsing is basic; malformed rules are skipped. Amounts are numeric. For words like "a lot" instead of numbers, you could map them (e.g., "a lot" -> 5) in the parser.
+Testing: Run the code to see it in action. Adjust parameters like perturbation_chance for more/less disturbance.
+
+If this doesn't match what you envisioned or you want modifications (e.g., multi-variable coupling, more natural parsing with libraries like sympy for symbolic stuff), let me know!
+
+
+
